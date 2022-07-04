@@ -9,9 +9,13 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.1.4",
+    "@vueuse/integrations": "^8.4.1",
+    "axios": "^0.27.2",
     "element-plus": "^2.1.11",
+    "universal-cookie": "^4.0.4",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.15"
+    "vue-router": "^4.0.15",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",
