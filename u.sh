@@ -1,6 +1,6 @@
 info=$1
 if ["$info" = ""];
-then info=":pencil: 登录页：权限、路由配置完善"
+then info="feat:update docs"
 fi
 git add -A
 git commit -m "$info"
