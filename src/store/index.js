@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import { login,getinfo } from '~/api/manager'
 import {
-    setToken
+    setToken,removeToken
 } from '~/composables/auth'
 const store = createStore({
     state() {
@@ -35,6 +35,14 @@ const store = createStore({
                     resolve(res)
                 }).catch(err=>reject(err))
             })
+        },
+        //退出登录
+        logout({ commit }){
+            //移除token
+            removeToken()
+            //清除用户状态--vuex
+            commit("SET_USERINFO",{})
+
         }
     }
 })

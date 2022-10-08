@@ -6,6 +6,13 @@
 
 用户多权限管理、商品多规格实现、订单发货、导出订单、图库模块、分销模块、分享海报等。
 
+### 采用技术
+
+- `Vue3.2 + Vue-router4 + Vuex4 + Vite2 + Vueuse`
+- `ElementPlus`
+- `Naive-ui`
+- `Windicss`
+
 ### 使用简介
 
 #### 安装依赖
