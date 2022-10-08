@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.1.4",
+    "@vueuse/core": "^9.3.0",
     "@vueuse/integrations": "^8.4.1",
     "axios": "^0.27.2",
     "element-plus": "^2.1.11",
