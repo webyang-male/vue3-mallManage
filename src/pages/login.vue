@@ -2,8 +2,8 @@
     <el-row class="login-container">
         <el-col :lg="16" :md="12" class="left">
             <div>
-                <div>欢迎光临</div>
-                <div>此站点是《vue3 + vite实战商城后台开发》视频课程的演示地址</div>
+                <div>欢迎光临👨🏻‍💻</div>
+                <div>此站点是《vue3 + vite实战商城后台开发》的演示地址</div>
             </div>
         </el-col>
         <el-col :lg="8" :md="12" class="right">
@@ -104,7 +104,8 @@ onBeforeUnmount(()=>{
 
 <style scoped>
 .login-container{
-    @apply min-h-screen bg-indigo-500;
+    @apply min-h-screen ;
+    background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
 }
 .login-container .left,.login-container .right{
     @apply flex items-center justify-center;
@@ -116,7 +117,7 @@ onBeforeUnmount(()=>{
     @apply font-bold text-5xl text-light-50 mb-4;
 }
 .left>div>div:last-child{
-    @apply text-gray-200 text-sm;
+    @apply text-white text-sm;
 }
 .right .title{
     @apply font-bold text-3xl text-gray-800;
