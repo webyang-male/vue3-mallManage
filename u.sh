@@ -1,6 +1,6 @@
 info=$1
 if ["$info" = ""];
-then info="feat(Public Head Development):Change Password"
+then info="test:General pop-up form component encapsulation"
 fi
 git add -A
 git commit -m "$info"
