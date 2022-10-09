@@ -58,13 +58,9 @@
 </template>
 
 <script setup>
-import { logout, updatepassword } from "~/api/manager"
-import { showModal, toast } from "~/composables/util"
-import { useRouter } from "vue-router"
-import { useStore } from "vuex"
 import { useFullscreen } from '@vueuse/core'
-import { ref, reactive } from 'vue'
 import FormDrawer from "~/components/FormDrawer.vue"
+import { useRepassword, useLogout } from '~/composables/useManager'
 
 
 const {
@@ -74,25 +70,11 @@ const {
     toggle
 } = useFullscreen()
 
+const {
+    form, rules, formRef, onSubmit, formDrawerRef, openRePasswordForm
+} = useRepassword()
 
-const router = useRouter()
-const store = useStore()
-//抽屉组件状态
-// const showdrawer = ref(false)
-const formDrawerRef = ref(null)
-
-function handleLogout() {
-    showModal("是否退出登录？").then(res => {
-        logout().finally(res => {
-            //清除用户状态
-            store.dispatch("logout")
-            //跳转回登录页
-            router.push("/login")
-            //退出提示
-            toast("退出登录成功")
-        })
-    })
-}
+const { handleLogout } = useLogout()
 
 //下拉菜单事件
 const handleCommand = (c) => {
@@ -102,8 +84,7 @@ const handleCommand = (c) => {
             break;
 
         case "rePassword":
-            // showdrawer.value = true
-            formDrawerRef.value.open()
+            openRePasswordForm()
             break;
     }
 }
@@ -111,58 +92,6 @@ const handleCommand = (c) => {
 //刷新
 const handleRefresh = () => location.reload();
 
-
-//抽屉--修改密码
-const form = reactive({
-    oldpassword: "",
-    username: "",
-    repassword: ""
-})
-
-const rules = {
-    oldpassword: [
-        {
-            required: true,
-            message: '旧密码不能为空',
-            trigger: 'blur'
-        },
-    ],
-    password: [
-        {
-            required: true,
-            message: '新密码不能为空',
-            trigger: 'blur'
-        },
-    ],
-    repassword: [
-        {
-            required: true,
-            message: '确认密码不能为空',
-            trigger: 'blur'
-        },
-    ]
-}
-
-const formRef = ref(null)
-const onSubmit = () => {
-    formRef.value.validate((valid) => {
-        if (!valid) {
-            return false
-        }
-        formDrawerRef.value.showLoading()
-        updatepassword(form)
-            .then(res => {
-                toast("修改密码成功，请重新登录！")
-                //清除用户状态
-                store.dispatch("logout")
-                //跳转回登录页
-                router.push("/login")
-            })
-            .finally(() => {
-                formDrawerRef.value.hideLoading()
-            })
-    })
-}
 
 </script>
 
