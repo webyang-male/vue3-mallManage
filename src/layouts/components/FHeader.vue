@@ -17,8 +17,8 @@
         <div class="ml-auto flex items-center">
             <el-tooltip effect="dark" content="全屏" placement="bottom">
                 <el-icon class="icon-btn" @click="toggle">
-                    <FullScreen v-if="!isFullscreen"/>
-                    <Aim v-else/>
+                    <FullScreen v-if="!isFullscreen" />
+                    <Aim v-else />
                 </el-icon>
             </el-tooltip>
             <el-dropdown class="dropdown" @command="handleCommand">
@@ -38,25 +38,49 @@
             </el-dropdown>
         </div>
     </div>
+    <el-drawer v-model="showdrawer" title="修改密码" size="45%" :close-on-click-modal="false">
+        <el-form ref="formRef" :rules="rules" :model="form" label-width="80px" size="small">
+            <el-form-item prop="oldpassword" label="旧密码">
+                <el-input v-model="form.oldpassword" placeholder="请输入旧密码">
+                </el-input>
+            </el-form-item>
+            <el-form-item prop="password" label="新密码">
+                <el-input type="password" v-model="form.password" placeholder="请输入新密码" show-password>
+                </el-input>
+            </el-form-item>
+            <el-form-item prop="repassword" label="确认密码">
+                <el-input type="password" v-model="form.repassword" placeholder="请再次输入密码" show-password>
+                </el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="onSubmit" :loading="loading">提交</el-button>
+            </el-form-item>
+        </el-form>
+    </el-drawer>
 </template>
 
 <script setup>
-import { logout } from "~/api/manager"
+import { logout, updatepassword } from "~/api/manager"
 import { showModal, toast } from "~/composables/util"
 import { useRouter } from "vue-router"
 import { useStore } from "vuex"
 import { useFullscreen } from '@vueuse/core'
+import { ref, reactive } from 'vue'
 
-const { 
+
+
+const {
     //是否全屏
-    isFullscreen, 
+    isFullscreen,
     //切换全屏
-    toggle 
+    toggle
 } = useFullscreen()
 
 
 const router = useRouter()
 const store = useStore()
+//抽屉组件状态
+const showdrawer = ref(false)
 
 function handleLogout() {
     showModal("是否退出登录？").then(res => {
@@ -79,7 +103,7 @@ const handleCommand = (c) => {
             break;
 
         case "rePassword":
-            console.log(111);
+            showdrawer.value = true
             break;
     }
 }
@@ -87,7 +111,59 @@ const handleCommand = (c) => {
 //刷新
 const handleRefresh = () => location.reload();
 
-//全屏
+
+//抽屉--修改密码
+const form = reactive({
+    oldpassword: "",
+    username: "",
+    repassword: ""
+})
+
+const rules = {
+    oldpassword: [
+        {
+            required: true,
+            message: '旧密码不能为空',
+            trigger: 'blur'
+        },
+    ],
+    password: [
+        {
+            required: true,
+            message: '新密码不能为空',
+            trigger: 'blur'
+        },
+    ],
+    repassword: [
+        {
+            required: true,
+            message: '确认密码不能为空',
+            trigger: 'blur'
+        },
+    ]
+}
+
+const formRef = ref(null)
+const loading = ref(false)
+const onSubmit = () => {
+    formRef.value.validate((valid) => {
+        if (!valid) {
+            return false
+        }
+        loading.value = true
+        updatepassword(form)
+            .then(res => {
+                toast("修改密码成功，请重新登录！")
+                //清除用户状态
+                store.dispatch("logout")
+                //跳转回登录页
+                router.push("/login")
+            })
+            .finally(() => {
+                loading.value = false
+            })
+    })
+}
 
 </script>
 
