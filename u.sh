@@ -1,6 +1,6 @@
 info=$1
 if ["$info" = ""];
-then info="feat:update readme and add some unimportant changes"
+then info="feat(Side menu development):style layout and route jump"
 fi
 git add -A
 git commit -m "$info"
