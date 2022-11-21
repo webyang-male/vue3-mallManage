@@ -1,6 +1,6 @@
 info=$1
 if ["$info" = ""];
-then info="feat(repassword):Combined api encapsulation simplifies code"
+then info="feat:update readme and add some unimportant changes"
 fi
 git add -A
 git commit -m "$info"

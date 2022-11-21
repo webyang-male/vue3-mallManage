@@ -35,9 +35,19 @@ yarn build
 
 tips：理论项目运行的地址默认是`http://localhost:3000/#/`
 
+
+
 ### 项目效果
 
-404 `NotUploadException`😂
+![](./ProjectShow/1.png)
+
+![](./ProjectShow/2.png)
+
+
+
+### ![](./ProjectShow/3.png)
+
+![](./ProjectShow/4.png)
 
 ### 其他
 
