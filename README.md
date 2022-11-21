@@ -1,3 +1,7 @@
+<p align="center" dir="auto"><a href="https://vuejs.org" rel="nofollow"><img  src="./public/Vue.png" alt="Vue logo" data-canonical-src="https://vuejs.org/images/logo.png" style="max-width: 100%;"></a></p>
+
+
+
 ### 项目简介：
 
 `Vue3` + `ElementPlus` + `Vite`实战开发商城后台管理系统。
