@@ -1,13 +1,3 @@
 <template>
-    <div>
-        标签页
-    </div>
+    <div>标签导航</div>
 </template>
-
-<script setup>
-
-</script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -7,8 +7,8 @@
 </template>
 
 <style>
-/* 全局进度加载条样式 */
-#nprogress .bar {
-  background: tomato;
+#nprogress .bar{
+  background-color: #f4f4f4!important;
+  height: 3px!important;
 }
 </style>
