@@ -1,6 +1,6 @@
 info=$1
 if ["$info" = ""];
-then info="feat(v0.5):Front and rear interaction of menu data"
+then info="feat:Front and rear interaction of menu data and update 404 page"
 fi
 git add -A
 git commit -m "$info"
