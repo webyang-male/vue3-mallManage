@@ -37,10 +37,6 @@ yarn dev
 yarn build
 ```
 
-tips：理论项目运行的地址默认是`http://localhost:3000/#/`
-
-
-
 ### 项目效果
 
 ![](./ProjectShow/1.png)

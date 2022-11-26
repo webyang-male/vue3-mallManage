@@ -67,7 +67,7 @@ const handleSelect = (e) => {
 </script>
 <style>
 .f-menu {
-    transition: all 0.2s;
+    transition: all 0.3s;
     top: 64px;
     bottom: 0;
     left: 0;
