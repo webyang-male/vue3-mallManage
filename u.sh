@@ -1,6 +1,6 @@
 info=$1
 if ["$info" = ""];
-then info="feat:Front and rear interaction of menu data and update 404 page"
+then info="feat(v0.5):Add route dynamically according to menu"
 fi
 git add -A
 git commit -m "$info"
