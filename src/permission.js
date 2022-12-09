@@ -23,17 +23,18 @@ router.beforeEach(async (to, from, next) => {
   }
 
   // 如果用户登录了，自动获取用户信息，并存储在vuex当中
+  let hasNewRoutes = false;
   if (token) {
-    let {menus} = await store.dispatch("getinfo");
+    let { menus } = await store.dispatch("getinfo");
     //动态添加路由
-    addRoutes(menus);
+    hasNewRoutes = addRoutes(menus);
   }
 
   // 设置页面标题
-  let title = (to.meta.title ? to.meta.title : "") + "-帝莎编程商城后台";
+  let title = (to.meta.title ? to.meta.title : "Vue3") + "-追梦编程商城后台";
   document.title = title;
 
-  next();
+  hasNewRoutes ? next(to.fullPath) : next();
 });
 
 // 全局后置守卫

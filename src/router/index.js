@@ -82,11 +82,14 @@ export const router = createRouter({
 
 //动态添加路由方法
 export function addRoutes(menus) {
+  //是否有新的路由
+  let hasNewRoutes = false;
   const findAndAddRoutesByMenus = (arr) => {
     arr.forEach((e) => {
       let item = asyncRoutes.find((o) => o.path == e.frontpath);
-      if (item && router.hasRoute(item.path)) {
+      if (item && !router.hasRoute(item.path)) {
         router.addRoute("admin", item);
+        hasNewRoutes = true;
       }
       //子路由
       if (e.child && e.child.length > 0) {
@@ -96,5 +99,6 @@ export function addRoutes(menus) {
   };
   findAndAddRoutesByMenus(menus)
 
-  console.log("获取路由",router.getRoutes());
+  // console.log("获取路由",router.getRoutes());
+  return hasNewRoutes;
 }
