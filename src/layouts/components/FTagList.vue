@@ -31,8 +31,10 @@
 
 <script  setup>
 import { ref } from 'vue'
-import { useRoute } from "vue-router"
+import { useRoute, onBeforeRouteUpdate } from "vue-router"
+import { useCookies } from '@vueuse/integrations/useCookies'
 
+const cookie = useCookies()
 const route = useRoute()
 
 const activeTab = ref(route.path)
@@ -40,12 +42,30 @@ const tabList = ref([
     {
         title: '后台首页',
         path: "/"
-    }, {
-        title: '商城管理',
-        path: "/goods/list"
     }
 ])
 
+function addTab(tab){
+    let noTab = tabList.value.findIndex(t=>t.path == tab.path) == -1
+    if (noTab) {
+        tabList.value.push(tab)
+    }
+    cookie.set("tabList",tabList.value)
+}
+onBeforeRouteUpdate((to, from) => {
+    // console.log({
+    //     title: to.meta.title,
+    //     path: to.meta.path
+    // });
+    
+    //激活选中
+    activeTab.value = to.path
+    //添加路由卡片
+    addTab({
+        title: to.meta.title,
+        path: to.meta.path
+    })
+})
 
 const removeTab = (targetName) => {
 
