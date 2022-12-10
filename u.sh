@@ -1,6 +1,6 @@
 info=$1
 if ["$info" = ""];
-then info="feat:turn off all other tag functions"
+then info="feat:keep alive page caching"
 fi
 git add -A
 git commit -m "$info"
