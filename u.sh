@@ -1,6 +1,6 @@
 info=$1
 if ["$info" = ""];
-then info="fix:Dropdown arrow icon misplaced"
+then info="beta(tag navigation component):synchronous routing and storage"
 fi
 git add -A
 git commit -m "$info"

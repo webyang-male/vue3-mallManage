@@ -1,8 +1,8 @@
 <template>
     <div class="f-tags-list" :style="{ left: $store.state.asideWidth }">
-        <el-tabs style="min-width:100px ;" v-model="editableTabsValue" type="card" class="demo-tabs" closable
-            @tab-remove="removeTab">
-            <el-tab-pane v-for="item in editableTabs" :key="item.name" :label="item.title" :name="item.name">
+        <el-tabs style="min-width:100px ;" v-model="activeTab" type="card" class="demo-tabs" @tab-remove="removeTab">
+            <el-tab-pane :closable="item.path != '/'" v-for="item in tabList" :key="item.path" :label="item.title"
+                :name="item.path">
 
             </el-tab-pane>
         </el-tabs>
@@ -31,61 +31,24 @@
 
 <script  setup>
 import { ref } from 'vue'
+import { useRoute } from "vue-router"
 
-let tabIndex = 2
-const editableTabsValue = ref('2')
-const editableTabs = ref([
+const route = useRoute()
+
+const activeTab = ref(route.path)
+const tabList = ref([
     {
-        title: 'Tab 1',
-        name: '1',
-        content: 'Tab 1 content',
-    },
-    {
-        title: 'Tab 2',
-        name: '2',
-        content: 'Tab 2 content',
-    },
-    {
-        title: 'Tab 1',
-        name: '33',
-        content: 'Tab 1 content',
+        title: '后台首页',
+        path: "/"
     }, {
-        title: 'Tab 1',
-        name: '1',
-        content: 'Tab 1 content',
-    },
-    {
-        title: 'Tab 2',
-        name: '2',
-        content: 'Tab 2 content',
+        title: '商城管理',
+        path: "/goods/list"
     }
 ])
 
-const addTab = (targetName) => {
-    const newTabName = `${++tabIndex}`
-    editableTabs.value.push({
-        title: 'New Tab',
-        name: newTabName,
-        content: 'New Tab content',
-    })
-    editableTabsValue.value = newTabName
-}
-const removeTab = (targetName) => {
-    const tabs = editableTabs.value
-    let activeName = editableTabsValue.value
-    if (activeName === targetName) {
-        tabs.forEach((tab, index) => {
-            if (tab.name === targetName) {
-                const nextTab = tabs[index + 1] || tabs[index - 1]
-                if (nextTab) {
-                    activeName = nextTab.name
-                }
-            }
-        })
-    }
 
-    editableTabsValue.value = activeName
-    editableTabs.value = tabs.filter((tab) => tab.name !== targetName)
+const removeTab = (targetName) => {
+
 }
 </script>
 <style scoped>
@@ -112,7 +75,7 @@ const removeTab = (targetName) => {
 :deep(.el-tabs__item) {
     border: 0 !important;
     line-height: 32px !important;
-    @apply mx-1 bg-white h-[32px] rounded;
+    @apply mx-1 bg-white h-[32px] rounded mt-1;
 
 }
 
