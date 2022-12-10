@@ -1,6 +1,6 @@
 info=$1
 if ["$info" = ""];
-then info="feat:Tab Navigate and click to jump to the page"
+then info="feat:clear cookie"
 fi
 git add -A
 git commit -m "$info"
